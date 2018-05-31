@@ -10,6 +10,7 @@ import (
 	"os"
 	"path"
 	"path/filepath"
+	"plugin"
 	"reflect"
 	"strconv"
 	"strings"
@@ -34,6 +35,27 @@ type Parser struct {
 	registerTypes map[string]*ast.TypeSpec
 
 	PropNamingStrategy string
+	TypeDefinePlugin   *TypeDefinePlugin
+}
+
+type TypeDefinePlugin struct {
+	SimpleTypeMap map[string]string
+}
+
+func NewTypeDefinePlugin(typeDefinePath string) *TypeDefinePlugin {
+	if typeDefinePath == "" {
+		return &TypeDefinePlugin{SimpleTypeMap: map[string]string{}}
+	}
+	typeDefinePlugin, err := plugin.Open(typeDefinePath)
+	if err != nil {
+		log.Fatalf("could not open typeDifinePath path=%s err= %s", typeDefinePath, err)
+	}
+	simpleTypeMapSymbol, err := typeDefinePlugin.Lookup("SimpleTypeMap")
+	if err != nil {
+		log.Println("not found simpleTypeMap")
+	}
+	m := *simpleTypeMapSymbol.(*map[string]string)
+	return &TypeDefinePlugin{SimpleTypeMap: m}
 }
 
 // New creates a new Parser with default properties.
@@ -435,7 +457,6 @@ type structField struct {
 
 func (parser *Parser) parseStruct(pkgName string, field *ast.Field) (properties map[string]spec.Schema) {
 	properties = map[string]spec.Schema{}
-	// name, schemaType, arrayType, formatType, exampleValue :=
 	structField := parser.parseField(field)
 	if structField.name == "" {
 		return
@@ -522,7 +543,7 @@ func (parser *Parser) parseAnonymousField(pkgName string, field *ast.Field, prop
 }
 
 func (parser *Parser) parseField(field *ast.Field) *structField {
-	prop := getPropertyName(field)
+	prop := getPropertyName(field, parser.TypeDefinePlugin)
 	if len(prop.ArrayType) == 0 {
 		CheckSchemaType(prop.SchemaType)
 	} else {

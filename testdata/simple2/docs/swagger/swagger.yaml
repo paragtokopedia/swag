@@ -5,7 +5,7 @@ definitions:
       created_at:
         type: string
       error_code:
-        type: integer
+        type: string
       error_message:
         type: string
     type: object
@@ -14,8 +14,8 @@ definitions:
       category:
         properties:
           id:
-            example: 1
-            type: integer
+            example: "1"
+            type: string
           name:
             example: category_name
             type: string
@@ -30,8 +30,8 @@ definitions:
           small_category:
             properties:
               id:
-                example: 1
-                type: integer
+                example: "1"
+                type: string
               name:
                 example: detail_category_name
                 type: string
@@ -42,6 +42,8 @@ definitions:
                 items:
                   type: string
                 type: array
+            required:
+            - name
             type: object
         type: object
       data:
@@ -49,12 +51,12 @@ definitions:
       decimal:
         type: number
       id:
-        example: 1
+        example: "1"
         format: int64
-        type: integer
+        type: string
       is_alive:
-        example: true
-        type: boolean
+        example: "true"
+        type: string
       name:
         example: poti
         type: string
@@ -74,8 +76,8 @@ definitions:
           type: string
         type: array
       price:
-        example: 3.25
-        type: number
+        example: "3.25"
+        type: string
       status:
         type: string
       tags:
@@ -84,30 +86,32 @@ definitions:
         type: array
       uuid:
         type: string
+    required:
+    - price
     type: object
   web.Pet2:
     properties:
       deleted_at:
         type: string
       id:
-        type: integer
+        type: string
       middle_name:
         type: string
     type: object
   web.RevValue:
     properties:
       data:
-        type: integer
+        type: string
       err:
-        type: integer
+        type: string
       status:
-        type: boolean
+        type: string
     type: object
   web.Tag:
     properties:
       id:
         format: int64
-        type: integer
+        type: string
       name:
         type: string
       pets:

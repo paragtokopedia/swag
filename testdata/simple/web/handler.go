@@ -19,19 +19,22 @@ type Pet struct {
 			PhotoUrls []string `json:"photo_urls" example:"http://test/image/1.jpg,http://test/image/2.jpg"`
 		} `json:"small_category"`
 	} `json:"category"`
-	Name      string          `json:"name" example:"poti"`
-	PhotoUrls []string        `json:"photo_urls" example:"http://test/image/1.jpg,http://test/image/2.jpg" binding:"required"`
-	Tags      []Tag           `json:"tags"`
-	Pets      *[]Pet2         `json:"pets"`
-	Pets2     []*Pet2         `json:"pets2"`
-	Status    string          `json:"status"`
-	Price     float32         `json:"price" example:"3.25"`
-	IsAlive   bool            `json:"is_alive" example:"true"`
-	Data      interface{}     `json:"data"`
-	Hidden    string          `json:"-"`
-	UUID      uuid.UUID       `json:"uuid"`
-	Decimal   decimal.Decimal `json:"decimal"`
+	Name        string          `json:"name" example:"poti"`
+	PhotoUrls   []string        `json:"photo_urls" example:"http://test/image/1.jpg,http://test/image/2.jpg" binding:"required"`
+	Tags        []Tag           `json:"tags"`
+	Pets        *[]Pet2         `json:"pets"`
+	Pets2       []*Pet2         `json:"pets2"`
+	Status      string          `json:"status"`
+	Price       float32         `json:"price" example:"3.25"`
+	IsAlive     bool            `json:"is_alive" example:"true"`
+	Data        interface{}     `json:"data"`
+	Hidden      string          `json:"-"`
+	UUID        uuid.UUID       `json:"uuid"`
+	Decimal     decimal.Decimal `json:"decimal"`
+	SpecialType SpecificNumber  `json:"special_type"`
 }
+
+type SpecificNumber float32
 
 type Tag struct {
 	ID   int    `json:"id" format:"int64"`

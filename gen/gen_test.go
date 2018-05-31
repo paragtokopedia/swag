@@ -11,7 +11,7 @@ import (
 func TestGen_Build(t *testing.T) {
 	searchDir := "../testdata/simple"
 	assert.NotPanics(t, func() {
-		New().Build(searchDir, "./main.go", "../testdata/simple/docs/swagger", "")
+		New().Build(searchDir, "./main.go", "../testdata/simple/docs/swagger", "", "../testdata/plugin/typeDefinePlugin.so")
 	})
 
 	if _, err := os.Stat(path.Join(searchDir, "docs", "docs.go")); os.IsNotExist(err) {
@@ -28,7 +28,7 @@ func TestGen_Build(t *testing.T) {
 func TestGen_BuildSnakecase(t *testing.T) {
 	searchDir := "../testdata/simple2"
 	assert.NotPanics(t, func() {
-		New().Build(searchDir, "./main.go", "../testdata/simple2/docs/swagger", "snakecase")
+		New().Build(searchDir, "./main.go", "../testdata/simple2/docs/swagger", "snakecase", "")
 	})
 
 	if _, err := os.Stat(path.Join(searchDir, "docs", "docs.go")); os.IsNotExist(err) {
@@ -45,7 +45,7 @@ func TestGen_BuildSnakecase(t *testing.T) {
 func TestGen_BuildLowerCamelcase(t *testing.T) {
 	searchDir := "../testdata/simple3"
 	assert.NotPanics(t, func() {
-		New().Build(searchDir, "./main.go", "../testdata/simple3/docs/swagger", "")
+		New().Build(searchDir, "./main.go", "../testdata/simple3/docs/swagger", "", "")
 	})
 
 	if _, err := os.Stat(path.Join(searchDir, "docs", "docs.go")); os.IsNotExist(err) {

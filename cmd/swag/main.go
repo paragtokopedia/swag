@@ -22,7 +22,8 @@ func main() {
 				mainAPIFile := c.String("generalInfo")
 				swaggerConfDir := c.String("swagger")
 				strategy := c.String("propertyStrategy")
-				gen.New().Build(dir, mainAPIFile, swaggerConfDir, strategy)
+				typeDefinePath := c.String("typeDefinePath")
+				gen.New().Build(dir, mainAPIFile, swaggerConfDir, strategy, typeDefinePath)
 				return nil
 			},
 			Flags: []cli.Flag{
@@ -45,6 +46,11 @@ func main() {
 					Name:  "propertyStrategy, p",
 					Value: "",
 					Usage: "Property Naming Strategy like snakecase",
+				},
+				cli.StringFlag{
+					Name:  "typeDefinePath t",
+					Value: "",
+					Usage: "",
 				},
 			},
 		},

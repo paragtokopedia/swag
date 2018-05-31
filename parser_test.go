@@ -593,7 +593,7 @@ func TestParseSimpleApi(t *testing.T) {
 	searchDir := "testdata/simple"
 	mainAPIFile := "main.go"
 	p := New()
-	p.PropNamingStrategy = "uppercamelcase"
+	p.TypeDefinePlugin = NewTypeDefinePlugin("./testdata/plugin/typeDefinePlugin.so")
 	p.ParseAPI(searchDir, mainAPIFile)
 	b, _ := json.MarshalIndent(p.swagger, "", "    ")
 	assert.Equal(t, expected, string(b))

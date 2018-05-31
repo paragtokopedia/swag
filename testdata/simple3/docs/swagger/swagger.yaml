@@ -5,7 +5,7 @@ definitions:
       createdAt:
         type: string
       errorCode:
-        type: integer
+        type: string
       errorMessage:
         type: string
     type: object
@@ -14,12 +14,12 @@ definitions:
       category:
         properties:
           id:
-            example: 1
-            type: integer
+            example: "1"
+            type: string
           name:
             example: category_name
             type: string
-          photoUrls:
+          photoURLs:
             example:
             - http://test/image/1.jpg
             - http://test/image/2.jpg
@@ -27,15 +27,15 @@ definitions:
             items:
               type: string
             type: array
-          small_category:
+          smallCategory:
             properties:
               id:
-                example: 1
-                type: integer
+                example: "1"
+                type: string
               name:
                 example: detail_category_name
                 type: string
-              photoUrls:
+              photoURLs:
                 example:
                 - http://test/image/1.jpg
                 - http://test/image/2.jpg
@@ -49,12 +49,12 @@ definitions:
       decimal:
         type: number
       id:
-        example: 1
+        example: "1"
         format: int64
-        type: integer
+        type: string
       isAlive:
-        example: true
-        type: boolean
+        example: "true"
+        type: string
       name:
         example: poti
         type: string
@@ -66,7 +66,7 @@ definitions:
         items:
           $ref: '#/definitions/web.Pet2'
         type: array
-      photoUrls:
+      photoURLs:
         example:
         - http://test/image/1.jpg
         - http://test/image/2.jpg
@@ -74,8 +74,8 @@ definitions:
           type: string
         type: array
       price:
-        example: 3.25
-        type: number
+        example: "3.25"
+        type: string
       status:
         type: string
       tags:
@@ -90,24 +90,24 @@ definitions:
       deletedAt:
         type: string
       id:
-        type: integer
+        type: string
       middleName:
         type: string
     type: object
   web.RevValue:
     properties:
       data:
-        type: integer
+        type: string
       err:
-        type: integer
+        type: string
       status:
-        type: boolean
+        type: string
     type: object
   web.Tag:
     properties:
       id:
         format: int64
-        type: integer
+        type: string
       name:
         type: string
       pets:

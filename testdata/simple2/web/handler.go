@@ -3,6 +3,7 @@ package web
 import (
 	"time"
 
+	"github.com/google/uuid"
 	"github.com/shopspring/decimal"
 )
 
@@ -24,10 +25,10 @@ type Pet struct {
 	Pets      *[]Pet2
 	Pets2     []*Pet2
 	Status    string
-	Price     float32  `example:"3.25" validate:"required,gte=0,lte=130"`
-	IsAlive   bool     `example:"true"`
+	Price     float32 `example:"3.25" validate:"required,gte=0,lte=130"`
+	IsAlive   bool    `example:"true"`
 	Data      interface{}
-	Hidden    string   `json:"-"`
+	Hidden    string `json:"-"`
 	UUID      uuid.UUID
 	Decimal   decimal.Decimal
 }

@@ -25,51 +25,56 @@ func newArraySchemaPropertyName(arrayType string) propertyName {
 	}
 }
 
-func parseFieldSelectorExpr(astTypeSelectorExpr *ast.SelectorExpr) propertyName {
+func parseFieldSelectorExpr(name string, typeDefinePlugin *TypeDefinePlugin) propertyName {
 	// TODO: In the future, add functions and make them solve for each user
+	for k, v := range typeDefinePlugin.SimpleTypeMap {
+		if strings.ToUpper(k) == strings.ToUpper(name) {
+			return newSchemaPropertyName(v)
+		}
+	}
 	// Support for time.Time as a structure field
-	if "Time" == astTypeSelectorExpr.Sel.Name {
+	if "Time" == name {
 		return newSchemaPropertyName("string")
 	}
 
 	// Support bson.ObjectId type
-	if "ObjectId" == astTypeSelectorExpr.Sel.Name {
+	if "ObjectId" == name {
 		return newSchemaPropertyName("string")
 	}
 
 	// Supprt UUID
-	if "UUID" == strings.ToUpper(astTypeSelectorExpr.Sel.Name) {
+	if "UUID" == strings.ToUpper(name) {
 		return newSchemaPropertyName("string")
 	}
 
 	// Supprt shopspring/decimal
-	if "Decimal" == astTypeSelectorExpr.Sel.Name {
+	if "Decimal" == name {
 		return newSchemaPropertyName("number")
 	}
 
-	fmt.Printf("%s is not supported. but it will be set with string temporary. Please report any problems.", astTypeSelectorExpr.Sel.Name)
+	fmt.Printf("%s is not supported. but it will be set with string temporary. Please report any problems.", name)
 	return newSchemaPropertyName("string")
 }
 
 // getPropertyName returns the string value for the given field if it exists, otherwise it panics.
 // allowedValues: array, boolean, integer, null, number, object, string
-func getPropertyName(field *ast.Field) propertyName {
+func getPropertyName(field *ast.Field, typeDefinePlugin *TypeDefinePlugin) propertyName {
 	if astTypeSelectorExpr, ok := field.Type.(*ast.SelectorExpr); ok {
-		return parseFieldSelectorExpr(astTypeSelectorExpr)
+		return parseFieldSelectorExpr(astTypeSelectorExpr.Sel.Name, typeDefinePlugin)
 	}
 	if astTypeIdent, ok := field.Type.(*ast.Ident); ok {
 		name := astTypeIdent.Name
 		schemeType := TransToValidSchemeType(name)
-		return newSchemaPropertyName(schemeType)
+		return parseFieldSelectorExpr(schemeType, typeDefinePlugin)
 	}
 	if ptr, ok := field.Type.(*ast.StarExpr); ok {
 		if astTypeSelectorExpr, ok := ptr.X.(*ast.SelectorExpr); ok {
-			return parseFieldSelectorExpr(astTypeSelectorExpr)
+			return parseFieldSelectorExpr(astTypeSelectorExpr.Sel.Name, typeDefinePlugin)
 		}
 		if astTypeIdent, ok := ptr.X.(*ast.Ident); ok {
 			name := astTypeIdent.Name
 			schemeType := TransToValidSchemeType(name)
-			return newSchemaPropertyName(schemeType)
+			return parseFieldSelectorExpr(schemeType, typeDefinePlugin)
 		}
 		if astTypeArray, ok := ptr.X.(*ast.ArrayType); ok { // if array
 			if astTypeArrayIdent := astTypeArray.Elt.(*ast.Ident); ok {

@@ -238,7 +238,7 @@
                     "type": "string"
                 },
                 "error_code": {
-                    "type": "integer"
+                    "type": "string"
                 },
                 "error_message": {
                     "type": "string"
@@ -247,13 +247,16 @@
         },
         "web.Pet": {
             "type": "object",
+            "required": [
+                "price"
+            ],
             "properties": {
                 "category": {
                     "type": "object",
                     "properties": {
                         "id": {
-                            "type": "integer",
-                            "example": 1
+                            "type": "string",
+                            "example": "1"
                         },
                         "name": {
                             "type": "string",
@@ -272,10 +275,13 @@
                         },
                         "small_category": {
                             "type": "object",
+                            "required": [
+                                "name"
+                            ],
                             "properties": {
                                 "id": {
-                                    "type": "integer",
-                                    "example": 1
+                                    "type": "string",
+                                    "example": "1"
                                 },
                                 "name": {
                                     "type": "string",
@@ -302,13 +308,13 @@
                     "type": "number"
                 },
                 "id": {
-                    "type": "integer",
+                    "type": "string",
                     "format": "int64",
-                    "example": 1
+                    "example": "1"
                 },
                 "is_alive": {
-                    "type": "boolean",
-                    "example": true
+                    "type": "string",
+                    "example": "true"
                 },
                 "name": {
                     "type": "string",
@@ -337,8 +343,8 @@
                     ]
                 },
                 "price": {
-                    "type": "number",
-                    "example": 3.25
+                    "type": "string",
+                    "example": "3.25"
                 },
                 "status": {
                     "type": "string"
@@ -361,7 +367,7 @@
                     "type": "string"
                 },
                 "id": {
-                    "type": "integer"
+                    "type": "string"
                 },
                 "middle_name": {
                     "type": "string"
@@ -372,13 +378,13 @@
             "type": "object",
             "properties": {
                 "data": {
-                    "type": "integer"
+                    "type": "string"
                 },
                 "err": {
-                    "type": "integer"
+                    "type": "string"
                 },
                 "status": {
-                    "type": "boolean"
+                    "type": "string"
                 }
             }
         },
@@ -386,7 +392,7 @@
             "type": "object",
             "properties": {
                 "id": {
-                    "type": "integer",
+                    "type": "string",
                     "format": "int64"
                 },
                 "name": {

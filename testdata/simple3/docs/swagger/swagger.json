@@ -238,7 +238,7 @@
                     "type": "string"
                 },
                 "errorCode": {
-                    "type": "integer"
+                    "type": "string"
                 },
                 "errorMessage": {
                     "type": "string"
@@ -252,14 +252,14 @@
                     "type": "object",
                     "properties": {
                         "id": {
-                            "type": "integer",
-                            "example": 1
+                            "type": "string",
+                            "example": "1"
                         },
                         "name": {
                             "type": "string",
                             "example": "category_name"
                         },
-                        "photoUrls": {
+                        "photoURLs": {
                             "type": "array",
                             "format": "url",
                             "items": {
@@ -270,18 +270,18 @@
                                 "http://test/image/2.jpg"
                             ]
                         },
-                        "small_category": {
+                        "smallCategory": {
                             "type": "object",
                             "properties": {
                                 "id": {
-                                    "type": "integer",
-                                    "example": 1
+                                    "type": "string",
+                                    "example": "1"
                                 },
                                 "name": {
                                     "type": "string",
                                     "example": "detail_category_name"
                                 },
-                                "photoUrls": {
+                                "photoURLs": {
                                     "type": "array",
                                     "items": {
                                         "type": "string"
@@ -302,13 +302,13 @@
                     "type": "number"
                 },
                 "id": {
-                    "type": "integer",
+                    "type": "string",
                     "format": "int64",
-                    "example": 1
+                    "example": "1"
                 },
                 "isAlive": {
-                    "type": "boolean",
-                    "example": true
+                    "type": "string",
+                    "example": "true"
                 },
                 "name": {
                     "type": "string",
@@ -326,7 +326,7 @@
                         "$ref": "#/definitions/web.Pet2"
                     }
                 },
-                "photoUrls": {
+                "photoURLs": {
                     "type": "array",
                     "items": {
                         "type": "string"
@@ -337,8 +337,8 @@
                     ]
                 },
                 "price": {
-                    "type": "number",
-                    "example": 3.25
+                    "type": "string",
+                    "example": "3.25"
                 },
                 "status": {
                     "type": "string"
@@ -361,7 +361,7 @@
                     "type": "string"
                 },
                 "id": {
-                    "type": "integer"
+                    "type": "string"
                 },
                 "middleName": {
                     "type": "string"
@@ -372,13 +372,13 @@
             "type": "object",
             "properties": {
                 "data": {
-                    "type": "integer"
+                    "type": "string"
                 },
                 "err": {
-                    "type": "integer"
+                    "type": "string"
                 },
                 "status": {
-                    "type": "boolean"
+                    "type": "string"
                 }
             }
         },
@@ -386,7 +386,7 @@
             "type": "object",
             "properties": {
                 "id": {
-                    "type": "integer",
+                    "type": "string",
                     "format": "int64"
                 },
                 "name": {
