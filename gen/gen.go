@@ -68,6 +68,8 @@ package docs
 
 import (
 	"github.com/swaggo/swag"
+	"os"
+	"net"
 )
 
 var doc = {{.Doc}}
@@ -77,7 +79,28 @@ type s struct{}
 func (s *s) ReadDoc() string {
 	return doc
 }
+
+
 func init() {
-	swag.Register(swag.Name, &s{})
+    environ := os.Getenv("TKPENV")
+    if environ == "" {
+        environ = "development"
+    }
+    if environ != "development" {
+        host = getIP()
+    }
+    swag.Register(swag.Name, &s{})
+}
+
+func getIP() string {
+    addrs, _ := net.InterfaceAddrs()
+    for _, a := range addrs {
+        if ipnet, ok := a.(*net.IPNet); ok && !ipnet.IP.IsLoopback() {
+            if ipnet.IP.To4() != nil {
+                return ipnet.IP.String()
+            }
+        }
+    }
+    return "err"
 }
 `))
