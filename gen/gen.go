@@ -68,8 +68,6 @@ package docs
 
 import (
 	"github.com/swaggo/swag"
-	"os"
-	"net"
 )
 
 var doc = {{.Doc}}
