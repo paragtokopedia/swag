@@ -888,9 +888,9 @@ func (parser *Parser) visit(path string, f os.FileInfo, err error) error {
 // Skip returns filepath.SkipDir error if match vendor and hidden folder
 func Skip(f os.FileInfo) error {
 	// exclude vendor folder
-	if f.IsDir() && f.Name() == "vendor" {
-		return filepath.SkipDir
-	}
+	//if f.IsDir() && f.Name() == "vendor" {
+	//	return filepath.SkipDir
+	//}
 
 	// exclude all hidden folder
 	if f.IsDir() && len(f.Name()) > 1 && f.Name()[0] == '.' {
