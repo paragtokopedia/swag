@@ -3,15 +3,9 @@ package main
 import (
 	"log"
 	"os"
-
-<<<<<<< HEAD
 	"github.com/paragtokopedia/swag"
 	"github.com/paragtokopedia/swag/gen"
-=======
 	"github.com/pkg/errors"
-	"github.com/swaggo/swag"
-	"github.com/swaggo/swag/gen"
->>>>>>> cea5516ea40b3808d793983df71ee470f08219c6
 	"github.com/urfave/cli"
 )
 
